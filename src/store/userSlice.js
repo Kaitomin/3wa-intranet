@@ -2,7 +2,8 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   users: [],
-  currentUser: (JSON.parse(localStorage.getItem('currentUser')) || {})
+  currentUser: (JSON.parse(localStorage.getItem('currentUser')) || {}),
+  userRandom: {},
 }
 
 const fetchAllUsers = async () => {
@@ -15,15 +16,25 @@ export const fetchUsers = createAsyncThunk(
   'fetchUsers',
   async () => {
     const res = await fetchAllUsers()
-    return res
+      return res;
   }
 )
 
+export const fetchUserById = createAsyncThunk(
+  'fetchUserById',
+  async(userId) => {
+    const usersList = await fetchAllUsers();
+    const userFilter = usersList.find(user => user.id == userId)
+    console.log("usersList", userFilter)
+    console.log("userId", userId)
+    return userFilter;
+  }
+)
 export const login = createAsyncThunk(
   'login',
   async (newUser) => {
     const users = await fetchAllUsers()
-    // console.log(users)
+    console.log(users)
 
     const userFound = users.find(user => user.email === newUser.email)
     // console.log('userFound', userFound)
@@ -62,6 +73,10 @@ const userSlice = createSlice({
     builder.addCase(login.fulfilled, (state, action) => {
       // console.log('log', action.payload)
       state.currentUser = action.payload
+    })
+    builder.addCase(fetchUserById.fulfilled, (state, action) => {
+      // console.log('log', action.payload)
+      state.userRandom = action.payload
     })
   }
 })
