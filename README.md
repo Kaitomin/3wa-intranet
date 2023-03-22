@@ -8,6 +8,7 @@ Bouton : connexion
 2 champs type email, password
 dispatch : vérification au submit
 useState: si vérification contient une erreur
+
 --Page d'accueil
 Une fois connecté, l'utilisateur arrive sur la page d'accueil qui lui présente un de ses collaborateurs au hasard :
 H1, p, p, card
@@ -17,6 +18,7 @@ récupérer l'utilisateur connecté
 dispatch, envoyer un id aléatoire entre 1 et 42, async
 bouton liste, nav
 se connecter et admin
+
 --- Liste d'utilisateurs
 Les collaborateurs s'affichent sous forme de card, avec toutes leurs caractéristiques :
 formulaire
@@ -27,11 +29,14 @@ Cette page doit également permettre un affichage avec un système de filtres pa
 
 La liste doit se rafraîchir instantanément.
 useState
+
 ---- Modifier mon profil (formulaire)
 L'utilisateur doit également pouvoir accéder à une page de modification de ses informations personnelles (incluant le login/mot de passe) en cliquant sur son image de profil dans le header :
 Enfin, l'utilisateur doit pouvoir se déconnecter. Après déconnexion, aucune des pages précédentes (home, listing) ne sont accessibles.
 local storage
 Enfin, l'utilisateur doit pouvoir se déconnecter. Après déconnexion, aucune des pages précédentes (home, listing) ne sont accessibles.
+
+---------------------------------------
 
 B. Administrateur
 ----- Créer l'utilisateurs
