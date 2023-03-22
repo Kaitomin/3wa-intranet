@@ -1,9 +1,19 @@
-import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { login, fetchUsers } from '../store/userSlice'
+import { useNavigate } from 'react-router-dom'
 
 function Login() {
+  const { currentUser, users } = useSelector(state => state.users) 
   const dispatch = useDispatch()
-  const [inputs , setInputs] = useState({email: '', pass: ''})
+  const navigate = useNavigate()
+  const [inputs , setInputs] = useState({email: 'owen.lopez@example.com', pass: 'owen.lopez'})
+  
+  // useEffect(() => {
+  //   if (currentUser) {
+  //     navigate('/')
+  //   }
+  // }, [])
 
   const handleChange = e => {
     const name = e.target.name
@@ -13,8 +23,11 @@ function Login() {
 
   const handleSubmit = e => {
     e.preventDefault()
-    // dispatch()
+
+    if (inputs.email == '' || inputs.pass == '') return
+    dispatch(login(inputs))
   }
+
   return (
     <div>
       <h1>Login</h1>
