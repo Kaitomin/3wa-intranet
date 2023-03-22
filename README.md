@@ -9,7 +9,7 @@ Bouton : connexion
 dispatch : vérification au submit
 useState: si vérification contient une erreur
 
---Page d'accueil
+--Page d'accueil OK
 Une fois connecté, l'utilisateur arrive sur la page d'accueil qui lui présente un de ses collaborateurs au hasard :
 H1, p, p, card
 firstname
