@@ -20,9 +20,13 @@ function Form(props) {
 
   }
 
+  const handleSubmit = () => {
+    // dispatch depending on props received (modify, create)
+  }
+
   return (
     <div>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="civility">Civilité</label>
           <select name="civility" id="civility" value={inputs.civility} onChange={handleChange}>
@@ -77,7 +81,9 @@ function Form(props) {
         <div>
           <label htmlFor="urlAvatar">URL avatar</label>
           <input type="text" name="urlAvatar" id="urlAvatar" value={inputs.passConfirm} onChange={handleChange} />
-        </div>        
+        </div>
+        {/* Props for button text content */}
+        <button>Modifier</button>
       </form>
     </div>
   )
