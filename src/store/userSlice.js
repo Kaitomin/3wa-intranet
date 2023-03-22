@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   users: [],
-  currentUser: {}
+  currentUser: (JSON.parse(localStorage.getItem('currentUser')) || {})
 }
 
 const fetchAllUsers = async () => {
@@ -31,14 +31,16 @@ export const login = createAsyncThunk(
     if (userFound) {
       const pwd = userFound.email.split('@')[0]
       if (pwd === newUser.pass) {
-        // localStorage.setItem('currentUser', JSON.stringify(userFound))
+        localStorage.setItem('currentUser', JSON.stringify(userFound))
         return userFound
       }
       // error
       console.log('Error pass')
+      return {}
     } else {
       // error
       console.log('Error email')
+      return {}
     }
   }
 )
@@ -47,7 +49,10 @@ const userSlice = createSlice({
   name: 'users',
   initialState,
   reducers: {
-
+    logout: state => {
+      localStorage.removeItem('currentUser')
+      state.currentUser = {}
+    }
   },
   extraReducers: builder => {
     builder.addCase(fetchUsers.fulfilled, (state, action) => {
@@ -61,4 +66,5 @@ const userSlice = createSlice({
   }
 })
 
+export const { logout } = userSlice.actions
 export default userSlice.reducer

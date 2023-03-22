@@ -1,19 +1,21 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { login, fetchUsers } from '../store/userSlice'
+import { login } from '../store/userSlice'
 import { useNavigate } from 'react-router-dom'
 
 function Login() {
-  const { currentUser, users } = useSelector(state => state.users) 
+  const [inputs , setInputs] = useState({email: 'owen.lopez@example.com', pass: 'owen.lopez'})
+  const [errors, setErrors] = useState({email: '', pass: ''})
+  const { currentUser } = useSelector(state => state.users)
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const [inputs , setInputs] = useState({email: 'owen.lopez@example.com', pass: 'owen.lopez'})
-  
-  // useEffect(() => {
-  //   if (currentUser) {
-  //     navigate('/')
-  //   }
-  // }, [])
+
+  useEffect(() => {
+    // redirect if succesful login
+    if (currentUser.id) {
+      navigate('/')
+    }
+  }, [currentUser])
 
   const handleChange = e => {
     const name = e.target.name
