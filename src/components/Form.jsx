@@ -1,38 +1,65 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { filterInput } from '../utils/filter'
+import { useDispatch, useSelector } from 'react-redux'
+import { addUser, modifyUser, usersSelector } from '../store/userSlice'
+import { useLocation } from 'react-router-dom'
+import { currentUserSelector } from '../store/authSlice'
 
 const MODIFIER = 'Modifier'
 const AJOUTER = 'Ajouter'
+const initialState = {
+  civility: '',
+  category: '',
+  lastname: '',
+  firstname: '',
+  email: '',
+  password: '',
+  confirmPassword: '',
+  phone: '',
+  birthDate: '',
+  city: '',
+  country: '',
+  photo: ''
+}
 
-function Form({ user, type }) {
+function Form({ id, type }) {
+  const currentUser = useSelector(currentUserSelector)
+  const users = useSelector(usersSelector)
+
+  // Get user id from url query
+  const location = useLocation()
+  const urlId = location.pathname.split('/')[2]
+  
   const [inputs, setInputs] = useState({
-    civility: user?.gender || 'homme',
-    category: user?.category || 'client',
-    lastname: user?.lastname || '',
-    firstname: user?.firstname || '',
-    email: user?.email || '',
-    pass: '',
-    passConfirm: '',
-    tel: user?.phone || '',
-    birthDate: user?.birthdate || '',
-    city: user?.city || '',
-    country: user?.country || '',
-    avatarSrc: user?.photo || ''
-  })
-  const [errors, setErrors] = useState({
-    civility: '',
-    category: '',
-    lastname: '',
-    firstname: '',
-    email: '',
-    pass: '',
-    passConfirm: '',
-    tel: '',
-    birthDate: '',
+    id: '',
+    civility: 'Homme',
+    category: 'Client',
+    lastname:  '',
+    firstname:'',
+    email:'',
+    password: '',
+    confirmPassword: '',
+    phone: '',
+    birthdate: '1980-01-01',
     city: '',
     country: '',
-    avatarSrc: ''
+    photo: ''
   })
+
+  useEffect(() => {
+    // Get user id from URL search params, access from url
+    if (location.pathname === `/edit-user/${urlId}`) {
+      const data = users.find(user => user.id == urlId)
+      setInputs({...inputs, ...data, password: '', confirmPassword: ''})
+    } else if (location.pathname === `/profile`) {
+      setInputs({...inputs, ...currentUser, password: '', confirmPassword: ''})
+    } else {
+      return
+    }
+  }, [])
+  
+  const [errors, setErrors] = useState(initialState)
+  const dispatch = useDispatch()
 
   const handleChange = e => {
     setInputs({...inputs, [e.target.name]: e.target.value})
@@ -41,30 +68,36 @@ function Form({ user, type }) {
   const handleSubmit = e => {
     e.preventDefault()
 
-    const error = filterInput(inputs)
-    if (Object.keys(error).length) {
-      console.log(error)
-      return
-    }
+    setErrors(initialState)
+
+    // const error = filterInput(inputs)
+    
+    // console.log(error)
+    // if (Object.keys(error).length) {
+    //   setErrors({...errors, ...error})
+    //   console.log('errors', {...errors})
+    //   console.log('error', {...error})
+    //   return
+    // }
 
     if (inputs.pass !== inputs.passConfirm) {
       console.log('does not match')
       return
     }
 
-    console.log("PASS", inputs)
+    console.log("PASS")
 
     // dispatch action depending on props type received (modifier, ajouter)
-    // switch (type) {
-    //   case MODIFIER:
-    //     // do something
-    //     break
-    //   case AJOUTER:
-    //     // do something
-    //     break
-    //   default:
-    //     return
-    // }
+    switch (type) {
+      case MODIFIER:
+        dispatch(modifyUser(inputs))
+        break
+      case AJOUTER:
+        dispatch(addUser(inputs))
+        break
+      default:
+        return
+    }
   }
 
   return (
@@ -82,9 +115,9 @@ function Form({ user, type }) {
         <div>
           <label htmlFor="category">Catégorie</label>
           <select name="category" id="category" value={inputs.category} onChange={handleChange}>
-            <option value="client">Client</option>
-            <option value="technique">Technique</option>
-            <option value="marketing">Marketing</option>
+            <option value="Client">Client</option>
+            <option value="Technique">Technique</option>
+            <option value="Marketing">Marketing</option>
           </select>
           <span>{errors.category}</span>
         </div>
@@ -104,23 +137,23 @@ function Form({ user, type }) {
           <span>{errors.email}</span>
         </div>        
         <div>
-          <label htmlFor="pass">Mot de passe</label>
-          <input type="password" name="pass" id="pass" value={inputs.pass} onChange={handleChange} />
-          <span>{errors.pass}</span>
+          <label htmlFor="password">Mot de passe</label>
+          <input type="password" name="password" id="password" value={inputs.password} onChange={handleChange} />
+          <span>{errors.password}</span>
         </div>        
         <div>
-          <label htmlFor="passConfirm">Confirmation</label>
-          <input type="password" name="passConfirm" id="passConfirm" value={inputs.passConfirm} onChange={handleChange} />
-          <span>{errors.passConfirm}</span>
+          <label htmlFor="passwordConfirm">Confirmation</label>
+          <input type="password" name="confirmPassword" id="confirmPassword" value={inputs.confirmPassword} onChange={handleChange} />
+          <span>{errors.confirmPassword}</span>
         </div>        
         <div>
-          <label htmlFor="tel">Tel</label>
-          <input type="text" name="tel" id="tel" value={inputs.tel} onChange={handleChange} />
-          <span>{errors.tel}</span>
+          <label htmlFor="phone">Tel</label>
+          <input type="text" name="phone" id="phone" value={inputs.phone} onChange={handleChange} />
+          <span>{errors.phone}</span>
         </div>        
         <div>
-          <label htmlFor="birthDate">Date de naissance</label>
-          <input type="date" name="birthDate" id="birthDate" value={inputs.birthDate} min="1950-01-01" max="2024-01-01" onChange={handleChange} />
+          <label htmlFor="birthdate">Date de naissance</label>
+          <input type="date" name="birthdate" id="birthdate" value={inputs.birthdate} min="1950-01-01" max="2024-01-01" onChange={handleChange} />
           <span>{errors.birthDate}</span>
         </div>        
         <div>
@@ -134,9 +167,9 @@ function Form({ user, type }) {
           <span>{errors.country}</span>
         </div>        
         <div>
-          <label htmlFor="avatarSrc">URL avatar</label>
-          <input type="text" name="avatarSrc" id="avatarSrc" value={inputs.avatarSrc} onChange={handleChange} />
-          <span>{errors.avatarSrc}</span>
+          <label htmlFor="photo">URL avatar</label>
+          <input type="text" name="photo" id="photo" value={inputs.photo} onChange={handleChange} />
+          <span>{errors.photo}</span>
         </div>
         <button>{type}</button>
       </form>

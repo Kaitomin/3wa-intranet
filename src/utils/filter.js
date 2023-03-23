@@ -9,14 +9,14 @@ const TEL = 'tel'
 const BIRTHDATE = 'birthDate'
 const CITY = 'city'
 const COUNTRY = 'country'
-const AVATAR = 'avatarSrc'
+const PHOTO = 'photo'
 
 export const filterInput = (inputs) => {
   let err = {}
   for (const key in inputs) {
     if (!checkKey(key, inputs[key])) {
-
-      setError(key)
+      console.log('error', key)
+      err[key] = setError(key)
     }
   }
   return err
@@ -26,9 +26,10 @@ const checkKey = (key, val) => {
   switch (key) {
     case LASTNAME:
     case FIRSTNAME:
-    case CITY:
     case COUNTRY:
       return (/^[a-z]+$/i).test(val)
+    case CITY:
+      return (/^[a-z-]+$/i).test(val)
     case EMAIL:
       return (/^[a-z0-9.-]+@[a-z]+[.]{1}[a-z]+$/i).test(val)
     case PASS:
@@ -47,10 +48,10 @@ const setError = (key, val) => {
     case COUNTRY:
       return 'Uniquement a-z'
     case EMAIL:
-      return (/^[a-z0-9.-]+@[a-z]+[.]{1}[a-z]+$/i).test(val)
+      return 'Format invalide'
     case PASS:
     case PASSCONFIRM:
-      return (/^[a-z0-9.]+$/i).test(val)
+      return 'Uniquement a-z et .'
     default: 
       return true
   }

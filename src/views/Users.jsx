@@ -52,19 +52,23 @@ export default function Users({ user }) {
       return (
         (
           (firstName.includes(searchParams.searchKey.toLowerCase())) ||
-          (lastName.includes(searchParams.searchKey.toLowerCase()))) && 
-          (city.includes(searchParams.city.toLowerCase())) && 
-          (category.includes(searchParams.category.toLowerCase()))
-        
+          (lastName.includes(searchParams.searchKey.toLowerCase()))
+        ) && (
+          city.includes(searchParams.city.toLowerCase())
+        ) && (
+          category.includes(searchParams.category.toLowerCase())
+        )
       )
-
-    }
-    )
+    })
   )
 
   useEffect(() => {
-    dispatch(fetchUsers());
+    // Get all users if localStorage is empty, only executes once
+    if (users.length === 0) {
+      dispatch(fetchUsers())
+    }
   }, []);
+
   return (
     <Box sx={{ "& > :not(style)": { m: 1 }, width: 120 }}>
       <span>
@@ -80,7 +84,7 @@ export default function Users({ user }) {
       />
         <FormControl fullWidth>
             <span>{searchParams.city}</span>
-            <InputLabel i>Ville</InputLabel>
+            <InputLabel>Ville</InputLabel>
             <Select
               value={searchParams.city}
               label="City"
@@ -90,12 +94,7 @@ export default function Users({ user }) {
               <MenuItem value="">All</MenuItem>       
               {citiesSet.map(city => 
                 <MenuItem key={city} value={city}>{city}</MenuItem>  
-              )
-              }
-              {/* {users.} */}
-              {/* <MenuItem value="londres">Londres</MenuItem>
-              <MenuItem value="paris">Paris</MenuItem>
-              <MenuItem value="strasbourg">Strasbourg</MenuItem> */}
+              )}
             </Select>
           </FormControl>
           <FormControl fullWidth>

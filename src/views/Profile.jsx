@@ -1,14 +1,10 @@
 import React from 'react'
 import Form from '../components/Form'
-import { currentUserSelector } from '../store/authSlice'
-import { useSelector } from 'react-redux'
 
 function Profile() {
-  const currentUser = useSelector(currentUserSelector)
-
   return (
     <div>
-      <Form type='Modifier' user={currentUser} />
+      <Form type='Modifier' />
     </div>
   )
 }

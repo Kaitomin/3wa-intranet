@@ -16,7 +16,7 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { AvatarGroup } from '@mui/material';
 
-function Nav({ userId, userAdmin, userPhoto }) {
+function Nav({ user }) {
   const dispatch = useDispatch()
 
   const handleLogout = () => {
@@ -28,11 +28,11 @@ function Nav({ userId, userAdmin, userPhoto }) {
     <nav>
       <Link to='/'>Home</Link>
       <Link to='/users'>Liste</Link>
-      { !userId && <Link to='/login'>Connexion</Link> }
-      { userId && (
+      { !user.id && <Link to='/login'>Connexion</Link> }
+      { user.id && (
         <>
-          { userAdmin === true && <Link to='/add-user'>Ajouter</Link> }
-          <Link to='/profile'><img src={userPhoto} /></Link>
+          { user.isAdmin === true && <Link to='/add-user'>Ajouter</Link> }
+          <Link to='/profile'><img src={user.photo} /></Link>
           <button onClick={handleLogout}>Déconnexion</button>
         </>
       )}
