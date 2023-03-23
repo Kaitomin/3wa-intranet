@@ -5,7 +5,7 @@ import Card from "@mui/joy/Card";
 import Chip from "@mui/joy/Chip";
 import React from 'react'
 
-function CardStyle({ user }) {
+function CardStyle({ user, isAdmin }) {
   return (
     <Card
       variant="outlined"
@@ -60,6 +60,8 @@ function CardStyle({ user }) {
       >
         Anniversaire : {user.birthdate}
       </Chip>
+      { isAdmin && <button>éditer</button>}
+      { isAdmin && <button>Supprimer</button>}
     </div>
   </Card>
   )

@@ -27,6 +27,8 @@ export const fetchUserById = createAsyncThunk(
     return userFilter;
   }
 )
+// lastname, .city et .category :
+
 // To do
 export const login = createAsyncThunk(
   'login',
@@ -61,6 +63,9 @@ const userSlice = createSlice({
     logout: state => {
       localStorage.removeItem('currentUser')
       state.currentUser = {}
+    },
+    filterBy(state, action) {
+      state.filterBy = action;
     }
   },
   extraReducers: builder => {

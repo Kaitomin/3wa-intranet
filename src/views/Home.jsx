@@ -26,7 +26,7 @@ function Home() {
       <CardStyle user={currentUser} />
 
       <p>Avez-vous dit bonjour à : </p>
-      
+
       <br />
       <Button onClick={handleClick}>Dire bonjour à quelqu'un d'autre</Button>
       { Object.keys(userRandom).length > 0 && <CardStyle user={userRandom} /> }
