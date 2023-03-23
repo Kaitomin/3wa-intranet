@@ -2,7 +2,7 @@ import Nav from './components/Nav'
 import Router from './router'
 import { useSelector } from 'react-redux'
 import Login from './views/Login'
-import { currentUserSelector } from './store/userSlice'
+import { currentUserSelector } from './store/authSlice'
 import './App.css'
 
 function App() {

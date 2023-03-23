@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
-import { logout } from '../store/userSlice'
+import { Link, Navigate } from 'react-router-dom'
+import { logout } from '../store/authSlice'
 
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -18,11 +18,10 @@ import { AvatarGroup } from '@mui/material';
 
 function Nav({ userId, userAdmin, userPhoto }) {
   const dispatch = useDispatch()
-  const navigate = useNavigate()
 
   const handleLogout = () => {
-    dispatch(logout())
-    navigate('/login')
+    dispatch(logout());
+    <Navigate to='/' replace />
   }
 
   return (
@@ -32,7 +31,7 @@ function Nav({ userId, userAdmin, userPhoto }) {
       { !userId && <Link to='/login'>Connexion</Link> }
       { userId && (
         <>
-          {/* { userAdmin === true && <Link to='/add-user'></Link> } */}
+          { userAdmin === true && <Link to='/add-user'>Ajouter</Link> }
           <Link to='/profile'><img src={userPhoto} /></Link>
           <button onClick={handleLogout}>Déconnexion</button>
         </>

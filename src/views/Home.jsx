@@ -2,7 +2,8 @@ import React from "react";
 import Typography from "@mui/joy/Typography";
 import Button from "@mui/joy/Button";
 import { useDispatch, useSelector } from "react-redux";
-import { currentUserSelector, fetchUserById, userRandomSelector } from "../store/userSlice";
+import { fetchUserById, userRandomSelector } from "../store/userSlice";
+import { currentUserSelector } from "../store/authSlice";
 import CardStyle from "../components/CardStyle";
 
 function Home() {

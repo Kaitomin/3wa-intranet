@@ -8,7 +8,7 @@ import Profile from '../views/Profile'
 import Form from '../components/Form'
 import Protected from './routerGuard'
 import { useSelector } from 'react-redux'
-import { currentUserSelector } from '../store/userSlice'
+import { currentUserSelector } from '../store/authSlice'
 
 function index() {
   const currentUser = useSelector(currentUserSelector)
