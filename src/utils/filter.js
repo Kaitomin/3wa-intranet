@@ -3,8 +3,8 @@ const CATEGORY = 'category'
 const LASTNAME = 'lastname'
 const FIRSTNAME = 'firstname'
 const EMAIL = 'email'
-const PASS = 'pass'
-const PASSCONFIRM = 'passConfirm'
+const PASSWORD = 'password'
+const CONFIRMPASSWORD = 'confirmPassword'
 const TEL = 'tel'
 const BIRTHDATE = 'birthDate'
 const CITY = 'city'
@@ -13,11 +13,14 @@ const PHOTO = 'photo'
 
 export const filterInput = (inputs) => {
   let err = {}
+
   for (const key in inputs) {
-    if (!checkKey(key, inputs[key])) {
-      console.log('error', key)
-      err[key] = setError(key)
-    }
+    const isValid = checkKey(key, inputs[key])
+    if (!isValid) err[key] = setError(key, inputs[key])
+  }
+
+  if (inputs[PASSWORD] !== inputs[CONFIRMPASSWORD]) {
+    err[CONFIRMPASSWORD] = setError(CONFIRMPASSWORD, inputs[CONFIRMPASSWORD], false)
   }
   return err
 }
@@ -32,27 +35,35 @@ const checkKey = (key, val) => {
       return (/^[a-z-]+$/i).test(val)
     case EMAIL:
       return (/^[a-z0-9.-]+@[a-z]+[.]{1}[a-z]+$/i).test(val)
-    case PASS:
-    case PASSCONFIRM:
+    case PASSWORD:
+    case CONFIRMPASSWORD:
       return (/^[a-z0-9.]+$/i).test(val)
     default: 
       return true
   }
 }
 
-const setError = (key, val) => {
+const setError = (key, val, passMatch = true) => {
   switch (key) {
     case LASTNAME:
     case FIRSTNAME:
-    case CITY:
-    case COUNTRY:
-      return 'Uniquement a-z'
+      case COUNTRY:
+        if (!val) return 'Champ obligatoire'
+        else return 'Uniquement a-z'
+      case CITY:
+        if (!val) return 'Champ obligatoire'
+        else return 'Uniquement a-z et -'
     case EMAIL:
+      if (!val) return 'Champ obligatoire'
       return 'Format invalide'
-    case PASS:
-    case PASSCONFIRM:
+    case PASSWORD:
+      if (!val) return 'Champ obligatoire'
+      return 'Uniquement a-z et .'
+    case CONFIRMPASSWORD:
+      if (!val) return 'Champ obligatoire'
+      if (!passMatch) return 'Confirmation du mot de passe incorrecte'
       return 'Uniquement a-z et .'
     default: 
-      return true
+      return ''
   }
 }

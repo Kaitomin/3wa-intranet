@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice, nanoid } from "@reduxjs/toolkit";
 import { fetchAllUsers } from "../utils/fetch";
+import bcrypt from 'bcryptjs'
 
 const initialState = {
   users: JSON.parse(localStorage.getItem('users')) || [],
@@ -39,6 +40,11 @@ export const modifyUser = createAsyncThunk(
   async (newUser) => {
     const users = JSON.parse(localStorage.getItem('users')) || await fetchAllUsers()
     const userId = users.findIndex(user => user.id === newUser.id)
+
+    // hash password
+    const salt = bcrypt.genSaltSync(10)
+    const hashedPass = bcrypt.hashSync(newUser.password, salt)
+    newUser.password = hashedPass
 
     users[userId] = newUser
     localStorage.setItem('users', JSON.stringify(users))

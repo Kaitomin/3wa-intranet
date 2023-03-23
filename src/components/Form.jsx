@@ -7,7 +7,22 @@ import { currentUserSelector } from '../store/authSlice'
 
 const MODIFIER = 'Modifier'
 const AJOUTER = 'Ajouter'
-const initialState = {
+const inputsInitialState = {
+  id: '',
+  civility: 'Homme',
+  category: 'Client',
+  lastname:  '',
+  firstname:'',
+  email:'',
+  password: '',
+  confirmPassword: '',
+  phone: '',
+  birthdate: '1980-01-01',
+  city: '',
+  country: '',
+  photo: ''
+}
+const ErrorsInitialState = {
   civility: '',
   category: '',
   lastname: '',
@@ -22,43 +37,31 @@ const initialState = {
   photo: ''
 }
 
-function Form({ id, type }) {
+function Form({ type }) {
   const currentUser = useSelector(currentUserSelector)
   const users = useSelector(usersSelector)
+
+  const [modalMessage, setModalMessage] = useState('')
 
   // Get user id from url query
   const location = useLocation()
   const urlId = location.pathname.split('/')[2]
   
-  const [inputs, setInputs] = useState({
-    id: '',
-    civility: 'Homme',
-    category: 'Client',
-    lastname:  '',
-    firstname:'',
-    email:'',
-    password: '',
-    confirmPassword: '',
-    phone: '',
-    birthdate: '1980-01-01',
-    city: '',
-    country: '',
-    photo: ''
-  })
+  const [inputs, setInputs] = useState(inputsInitialState)
 
   useEffect(() => {
     // Get user id from URL search params, access from url
     if (location.pathname === `/edit-user/${urlId}`) {
       const data = users.find(user => user.id == urlId)
-      setInputs({...inputs, ...data, password: '', confirmPassword: ''})
+      setInputs({...inputsInitialState, ...data, password: '', confirmPassword: ''})
     } else if (location.pathname === `/profile`) {
-      setInputs({...inputs, ...currentUser, password: '', confirmPassword: ''})
+      setInputs({...inputsInitialState, ...currentUser, password: '', confirmPassword: ''})
     } else {
       return
     }
   }, [])
   
-  const [errors, setErrors] = useState(initialState)
+  const [errors, setErrors] = useState(ErrorsInitialState)
   const dispatch = useDispatch()
 
   const handleChange = e => {
@@ -68,41 +71,37 @@ function Form({ id, type }) {
   const handleSubmit = e => {
     e.preventDefault()
 
-    setErrors(initialState)
-
-    // const error = filterInput(inputs)
+    const error = filterInput(inputs)
     
-    // console.log(error)
-    // if (Object.keys(error).length) {
-    //   setErrors({...errors, ...error})
-    //   console.log('errors', {...errors})
-    //   console.log('error', {...error})
-    //   return
-    // }
-
-    if (inputs.pass !== inputs.passConfirm) {
-      console.log('does not match')
+    if (Object.keys(error).length) {
+      setErrors({...ErrorsInitialState, ...error})
       return
     }
-
-    console.log("PASS")
 
     // dispatch action depending on props type received (modifier, ajouter)
     switch (type) {
       case MODIFIER:
         dispatch(modifyUser(inputs))
+        setInputs({...currentUser, password: '', confirmPassword: ''})
+        setModalMessage('Utilisateur modifié')
+        setTimeout(() => setModalMessage(''), 3000)
         break
       case AJOUTER:
         dispatch(addUser(inputs))
+        setInputs({...inputsInitialState, password: '', confirmPassword: ''})
+        setModalMessage('Utilisateur ajouté')
+        setTimeout(() => setModalMessage(''), 3000)
         break
       default:
         return
     }
+    setErrors({...ErrorsInitialState})
   }
 
   return (
     <div className='form-container'>
       <h1>{type} utilisateur</h1>
+      <div className='modal'>{modalMessage}</div>
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="civility">Civilité</label>

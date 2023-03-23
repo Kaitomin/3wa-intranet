@@ -10,7 +10,7 @@ const initialState = {
 export const login = createAsyncThunk(
   'login',
   async (newUser) => {
-    const users = await fetchAllUsers()
+    const users = JSON.parse(localStorage.getItem('users')) || await fetchAllUsers()
     const userFound = users.find(user => user.email === newUser.email)
 
     if (userFound) {
