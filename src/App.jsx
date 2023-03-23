@@ -1,12 +1,12 @@
-import './App.css'
 import Nav from './components/Nav'
 import Router from './router'
 import { useSelector } from 'react-redux'
 import Login from './views/Login'
-import Form from './components/Form'
+import { currentUserSelector } from './store/userSlice'
+import './App.css'
 
 function App() {
-  const { currentUser } = useSelector(state => state.users)
+  const currentUser = useSelector(currentUserSelector)
 
   // show Login component if no logged in user
   if (!currentUser.id) {
@@ -15,8 +15,7 @@ function App() {
 
   return (
     <div className="App">
-      <Nav userId={currentUser.id} userAdmin={currentUser.isAdmin} />
-      <Form />
+      <Nav userId={currentUser.id} userAdmin={currentUser.isAdmin} userPhoto={currentUser.photo} />
       <Router />
     </div>
   )

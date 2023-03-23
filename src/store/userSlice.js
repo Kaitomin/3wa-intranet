@@ -16,20 +16,18 @@ export const fetchUsers = createAsyncThunk(
   'fetchUsers',
   async () => {
     const res = await fetchAllUsers()
-      return res;
+    return res;
   }
 )
-
 export const fetchUserById = createAsyncThunk(
   'fetchUserById',
   async(userId) => {
     const usersList = await fetchAllUsers();
     const userFilter = usersList.find(user => user.id == userId)
-    console.log("usersList", userFilter)
-    console.log("userId", userId)
     return userFilter;
   }
 )
+// To do
 export const login = createAsyncThunk(
   'login',
   async (newUser) => {
@@ -67,19 +65,20 @@ const userSlice = createSlice({
   },
   extraReducers: builder => {
     builder.addCase(fetchUsers.fulfilled, (state, action) => {
-      // console.log(action.payload)
       state.users = action.payload
     })
     builder.addCase(login.fulfilled, (state, action) => {
-      // console.log('log', action.payload)
       state.currentUser = action.payload
     })
     builder.addCase(fetchUserById.fulfilled, (state, action) => {
-      // console.log('log', action.payload)
       state.userRandom = action.payload
     })
   }
 })
+
+export const usersSelector = state => state.users.users
+export const currentUserSelector = state => state.users.currentUser
+export const userRandomSelector = state => state.users.userRandom
 
 export const { logout } = userSlice.actions
 export default userSlice.reducer

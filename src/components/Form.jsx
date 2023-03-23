@@ -1,31 +1,52 @@
 import React, { useState } from 'react'
 
-function Form(props) {
+const MODIFIER = 'Modifier'
+const AJOUTER = 'Ajouter'
+
+function Form({ user, type }) {
   const [inputs, setInputs] = useState({
-    civility: '',
-    category: '',
-    lastname: '',
-    firstname: '',
-    email: '',
+    civility: user?.gender || 'homme',
+    category: user?.category || 'client',
+    lastname: user?.lastname || '',
+    firstname: user?.firstname || '',
+    email: user?.email || '',
     pass: '',
     passConfirm: '',
-    tel: '',
-    birthDate: '',
-    city: '',
-    country: '',
-    avatarSrc: ''
+    tel: user?.phone || '',
+    birthDate: user?.birthdate || '',
+    city: user?.city || '',
+    country: user?.country || '',
+    avatarSrc: user?.photo || ''
   })
 
-  const handleChange = () => {
-
+  const handleChange = e => {
+    setInputs({...inputs, [e.target.name]: e.target.value})
   }
 
-  const handleSubmit = () => {
-    // dispatch depending on props received (modify, create)
+  const handleSubmit = e => {
+    e.preventDefault()
+
+    console.log(inputs)
+
+    // filter inputs
+
+
+    // dispatch action depending on props type received (modifier, ajouter)
+    switch (type) {
+      case MODIFIER:
+        // do something
+        break
+      case AJOUTER:
+        // do something
+        break
+      default:
+        return
+    }
   }
 
   return (
-    <div>
+    <div className='form-container'>
+      <h1>{type} utilisateur</h1>
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="civility">Civilité</label>
@@ -44,7 +65,7 @@ function Form(props) {
         </div>
         <div>
           <label htmlFor="lastname">Nom</label>
-          <input type="text" name="lastname" id="lastname" value={inputs.lastName} onChange={handleChange} />
+          <input type="text" name="lastname" id="lastname" value={inputs.lastname} onChange={handleChange} />
         </div>
         <div>
           <label htmlFor="firstname">Prénom</label>
@@ -79,11 +100,10 @@ function Form(props) {
           <input type="text" name="country" id="country" value={inputs.country} onChange={handleChange} />
         </div>        
         <div>
-          <label htmlFor="urlAvatar">URL avatar</label>
-          <input type="text" name="urlAvatar" id="urlAvatar" value={inputs.passConfirm} onChange={handleChange} />
+          <label htmlFor="avatarSrc">URL avatar</label>
+          <input type="text" name="avatarSrc" id="avatarSrc" value={inputs.avatarSrc} onChange={handleChange} />
         </div>
-        {/* Props for button text content */}
-        <button>Modifier</button>
+        <button>{type}</button>
       </form>
     </div>
   )

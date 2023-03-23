@@ -3,7 +3,20 @@ import { useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { logout } from '../store/userSlice'
 
-function Nav({ userId, userAdmin }) {
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import Menu from '@mui/material/Menu';
+import Container from '@mui/material/Container';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import Tooltip from '@mui/material/Tooltip';
+import MenuItem from '@mui/material/MenuItem';
+import { AvatarGroup } from '@mui/material';
+
+function Nav({ userId, userAdmin, userPhoto }) {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -19,8 +32,8 @@ function Nav({ userId, userAdmin }) {
       { !userId && <Link to='/login'>Connexion</Link> }
       { userId && (
         <>
-          { userAdmin === true && <Link to='/add-user'>Ajouter</Link> }
-          <Link to='/account'>Mon compte</Link>
+          {/* { userAdmin === true && <Link to='/add-user'></Link> } */}
+          <Link to='/profile'><img src={userPhoto} /></Link>
           <button onClick={handleLogout}>Déconnexion</button>
         </>
       )}
