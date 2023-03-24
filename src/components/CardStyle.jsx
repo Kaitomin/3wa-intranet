@@ -13,14 +13,17 @@ function CardStyle({ user, isAdmin }) {
       </div>
       <div className="card-content">
         <span style={{ backgroundColor: "#FFC0CB" }}>{user.category}</span>
-        <div style={{fontWeight: "900"}}>
+        <p style={{ fontWeight: "900" }}>
           {user.firstname} {user.lastname}
+          <span>
             (
-              {Math.floor(
+              {
+                Math.floor(
                 (new Date() - new Date(user.birthdate).getTime()) / 3.15576e10
               )}
             )
-        </div>
+          </span>
+        </p>
         <p>
           {user.city} {user.country}
         </p>

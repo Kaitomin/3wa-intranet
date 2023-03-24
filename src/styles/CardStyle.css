@@ -1,7 +1,3 @@
-span {
-    margin-left: 16rem;
-}
-
 .card {
     display: flex;
     width: 460px;
@@ -19,25 +15,6 @@ span {
     object-fit: cover;
 }
 
-.card-user {
-    flex-grow: 1;
-    background-color: #F2F2F2;
-    border: 1px solid #F2F2F2;
-    border-radius: 10px;
-    padding: 16px 0px 0px 100px;
-  } 
-  
-  .card-user ul {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    list-style: none;
-    width: 100%;
-  }
-  
-  .card-user li {
-    margin: 0 10px;
-  }
 
   .card-content {
     padding-bottom: 1rem;
@@ -55,7 +32,7 @@ span {
     font-weight: bold;
   }
   hr.rounded {
-    width: 100;
+    /* width: 100; */
     border-top: 8px solid #bbb;
     border-radius: 5px;
   }
