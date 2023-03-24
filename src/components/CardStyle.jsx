@@ -12,38 +12,40 @@ function CardStyle({ user, isAdmin }) {
         <img className="card-img" src={user.photo} alt="photo" />
       </div>
       <div className="card-content">
-        <span style={{ backgroundColor: "#FFC0CB" }}>{user.category}</span>
-        <p style={{ fontWeight: "900" }}>
+        <span className="card-content-category">{user.category}</span>
+        <p style={{ fontWeight: "bold" }}>
           {user.firstname} {user.lastname}
           <span>
             (
-              {
-                Math.floor(
-                (new Date() - new Date(user.birthdate).getTime()) / 3.15576e10
-              )}
+            {Math.floor(
+              (new Date() - new Date(user.birthdate).getTime()) / 3.15576e10
+            )}
             )
           </span>
         </p>
         <p>
           {user.city} {user.country}
         </p>
-        <p>{user.email}</p>
-        <p>{user.phone}</p>
-        <p>Anniversaire : {user.birthdate}</p>
+        <p style={{ marginLeft: "42px" }}>📧{user.email}</p>
+        <p style={{ marginLeft: "46px" }}>
+          <i className="fa-solid fa-phone"></i>
+          {user.phone}
+        </p>
+        <p style={{ marginLeft: "42px" }}>🎂Anniversaire : {user.birthdate}</p>
         <div>
           <hr className="rounded" />
         </div>
         <br />
         <div style={{ textAlign: "center" }}>
           {isAdmin && (
-            <button>
+            <button className="card-button-edit">
               <Link to={`/edit-user/${user.id}`} state={{ id: user.id }}>
                 Editer
               </Link>
             </button>
           )}
           {isAdmin && (
-            <button onClick={() => dispatch(deleteUser(user.id))}>
+            <button className="card-button-delete" onClick={() => dispatch(deleteUser(user.id))}>
               Supprimer
             </button>
           )}
