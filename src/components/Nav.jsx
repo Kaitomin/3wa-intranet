@@ -3,20 +3,7 @@ import { useDispatch } from 'react-redux'
 import { Link, Navigate } from 'react-router-dom'
 import { logout } from '../store/authSlice'
 
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
-import { AvatarGroup } from '@mui/material';
-
-function Nav({ user }) {
+function Nav({ userId, userAdmin, userPhoto }) {
   const dispatch = useDispatch()
 
   const handleLogout = () => {
@@ -24,15 +11,21 @@ function Nav({ user }) {
     <Navigate to='/' replace />
   }
 
+  const linkStyle = {
+    margin: "1rem",
+    textDecoration: "none",
+    color: 'blue'
+  }
+
   return (
-    <nav>
-      <Link to='/'>Home</Link>
-      <Link to='/users'>Liste</Link>
-      { !user.id && <Link to='/login'>Connexion</Link> }
-      { user.id && (
+    <nav className="navigation">
+      <Link to='/' style={linkStyle}>Home</Link>
+      <Link to='/users' style={linkStyle}>Liste</Link>
+      { !userId && <Link to='/login' style={linkStyle}>Connexion</Link> }
+      { userId && (
         <>
-          { user.isAdmin === true && <Link to='/add-user'>Ajouter</Link> }
-          <Link to='/profile'><img src={user.photo} /></Link>
+          { userAdmin === true && <Link to='/add-user' style={linkStyle}>Ajouter</Link> }
+          <Link to='/profile'><img src={userPhoto} /></Link>
           <button onClick={handleLogout}>Déconnexion</button>
         </>
       )}

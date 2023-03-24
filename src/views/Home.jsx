@@ -17,19 +17,19 @@ function Home() {
   };
   return (
     <div>
-      <Typography style={{ color: "white" }} level="h1">
+      <h1>
         Bienvenue sur l'intranet
-      </Typography>
-      <Typography style={{ color: "white" }} level="body1">
+      </h1>
+      <p style={{ color: "white" }}>
         La plate-forme de l'entreprise qui vous permet de retrouver tous vos
         collaborateurs.
-      </Typography>
+      </p>
       <CardStyle user={currentUser} />
 
       <p>Avez-vous dit bonjour à : </p>
 
       <br />
-      <Button onClick={handleClick}>Dire bonjour à quelqu'un d'autre</Button>
+      <button onClick={handleClick}>Dire bonjour à quelqu'un d'autre</button>
       { Object.keys(userRandom).length > 0 && <CardStyle user={userRandom} /> }
     </div>
   );
