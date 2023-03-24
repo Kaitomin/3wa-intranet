@@ -17,7 +17,7 @@ function Home() {
     dispatch(fetchUserById(userIdRandom));
   };
   return (
-    <div>
+    <div className="home-page">
       <h1>
         Bienvenue sur l'intranet
       </h1>
