@@ -16,8 +16,6 @@ export default function Users({ user }) {
     city: "",
     category: "",
   });
-  // const [city, setCity] = useState();
-  // technique Technique Marketing
   const dispatch = useDispatch();
   const users = useSelector(usersSelector);
   const currentUser = useSelector(currentUserSelector);
@@ -33,7 +31,6 @@ export default function Users({ user }) {
   const citiesSet = [...new Set(cities)];
 
   const filterUser =
-    // const firstName = user.firstname.toLowerCase();
     users &&
     users.filter((user) => {
       const firstName = user.firstname.toLowerCase();
@@ -58,44 +55,55 @@ export default function Users({ user }) {
 
   return (
     <div className="users-container">
-      <div>
-        <span>{searchParams.searchKey}</span>
-        <label htmlFor="searchKey">Nom</label>
-        <input
-          type="text"
-          id="searchKey"
-          value={searchParams.searchKey}
-          onChange={handleChange}
-          name="searchKey"
-        />
-        <label htmlFor="city-select">Ville</label>
-        <select
-          value={searchParams.city}
-          id="city-select"
-          name="city"
-          onChange={handleChange}
-        >
-          <option value="">All</option>
-          {citiesSet.map((city) => (
-            <option key={city} value={city}>
-              {city}
-            </option>
-          ))}
-        </select>
-        <label htmlFor="category-select">Categorie</label>
-        <select
-          value={searchParams.category}
-          id="category-select"
-          name="category"
-          onChange={handleChange}
-        >
-          <option value="">All</option>
-          <option value="Client">Client</option>
-          <option value="Technique">Technique</option>
-          <option value="Marketing">Marketing</option>
-        </select>
+      <div className="users-filter">
+        <h2>Filtres</h2>
+        <div>
+          <label htmlFor="searchKey">Nom</label>
+          <input
+            type="text"
+            id="searchKey"
+            value={searchParams.searchKey}
+            onChange={handleChange}
+            name="searchKey"
+            placeholder=">"
+          />
+        </div>
+        <div>
+          <label htmlFor="city-select">Ville</label>
+          <select
+            value={searchParams.city}
+            id="city-select"
+            name="city"
+            onChange={handleChange}
+          >
+            <option value="">All</option>
+            {citiesSet.map((city) => (
+              <option key={city} value={city}>
+                {city}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div>
+          <label htmlFor="category-select">Categorie</label>
+          <select
+            value={searchParams.category}
+            id="category-select"
+            name="category"
+            onChange={handleChange}
+            >
+            <option value="">All</option>
+            <option value="Client">Client</option>
+            <option value="Technique">Technique</option>
+            <option value="Marketing">Marketing</option>
+          </select>
+        </div>
       </div>
-      <div className="card-user">
+      <div 
+        className="card-user" 
+        style={filterUser.length > 0 ? {background: 'white'} : {background: 'inherit'}}
+      >
+        {filterUser.length == 0 && <p className="no-result">Aucun résultat :(</p>}
         {filterUser.length > 0 && (
           <ul>
             {filterUser.map((user) => (

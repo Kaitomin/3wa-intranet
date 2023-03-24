@@ -1,24 +1,116 @@
 .users-container {
-    display: flex;
+  display: flex;
+  max-width: 1500px;
+  padding: 3em 0;
+  margin: 0 auto;
+  gap: 0 3em;
+}
+p.no-result {
+  color: grey;
+  font-size: 2rem;
+  text-align: center;
 }
 
+/* Filters */
+.users-filter {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  gap: 1em 0;
+  background: white;
+  padding: 2em;
+  height: max-content;
+  border-radius: 20px;
+  box-shadow: 0 0 1px black;
+}
 
+.users-filter h2 {
+  background: black;
+  padding: 0.5em 1em;
+  color: white;
+  text-align: center;
+}
+
+.users-filter input {
+  font-family: inherit;
+  width: 100%;
+  border: 0;
+  border-bottom: 2px solid gray;
+  outline: 0;
+  font-size: 1.3rem;
+  color: steelblue;
+  padding: 7px 0;
+  background: transparent;
+  transition: border-color 0.2s;
+}
+
+.users-filter label {
+  transition: 0.2s;
+  font-size: 1rem;
+  color: grey;
+}
+
+.users-filter input:focus {
+ 
+  padding-bottom: 6px;  
+  font-weight: 700;
+  border-width: 3px;
+  border-image: linear-gradient(to right, #00e7ff, white);
+  border-image-slice: 1;
+}
+
+.users-filter input:focus label {
+  position: absolute;
+  top: 0;
+  display: block;
+  transition: 0.2s;
+  font-size: 1rem;
+  color: blue;
+  font-weight:700;    
+}
+
+.users-filter select {
+  /* appearance: none; */
+  background-color: transparent;
+  border: none;
+  padding: 0 1em 0 0;
+  margin: 0;
+  width: 100%;
+  font-family: inherit;
+  font-size: inherit;
+  cursor: inherit;
+  line-height: inherit;
+  z-index: 1;
+  color: steelblue;
+  /* outline: none; */
+}
+
+.users-filter option {
+  color: black;
+}
+
+.users-filter select:hover {
+  cursor: pointer;
+}
+
+.users-filter select,
+.users-filter inputs,
+.users-filter label {
+  font-size: 1.3rem;
+}
+
+/* Cards container */
 .card-user {
-    flex-grow: 1;
-    background-color: #F2F2F2;
-    border: 1px solid #F2F2F2;
-    border-radius: 10px;
-    padding: 16px 0px 0px 100px;
-  } 
-  
-  .card-user ul {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    list-style: none;
-    width: 100%;
-  }
-  
-  .card-user li {
-    margin: 0 10px;
-  }
+  flex-grow: 1;
+  width: 70%;
+} 
+.card-user ul {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  list-style: none;
+  width: 100%;
+}
+.card-user li {
+  margin: 0 10px;
+}
