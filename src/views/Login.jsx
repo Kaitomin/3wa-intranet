@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { currentUserSelector, login } from '../store/authSlice'
 import { useNavigate } from 'react-router-dom'
 import { filterInput } from '../utils/filter'
+import '../styles/Login.css'
 
 function Login() {
   const [inputs , setInputs] = useState({email: 'admin@admin.com', pass: 'admin'})
@@ -38,10 +39,12 @@ function Login() {
   }
 
   return (
-    <div>
-      <h1>Connexion</h1>
-      <p>Veuillez vous connecter</p>
+    <div className='login-container'> 
       <form onSubmit={handleSubmit}>
+        <div className='logo'>
+          <img src="/logo.png" width={150} />
+        </div>
+        {/* <h1>Connexion</h1> */}
         <div>
           <label htmlFor="email">Email</label>
           <input 

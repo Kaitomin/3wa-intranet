@@ -10,8 +10,8 @@ const MODIFIER = 'Modifier'
 const AJOUTER = 'Ajouter'
 const inputsInitialState = {
   id: '',
-  civility: 'Homme',
-  category: 'Client',
+  gender: '',
+  category: '',
   lastname:  '',
   firstname:'',
   email:'',
@@ -55,7 +55,8 @@ function Form({ type }) {
     if (location.pathname === `/edit-user/${urlId}`) {
       const data = users.find(user => user.id == urlId)
       setInputs({...inputsInitialState, ...data, password: '', confirmPassword: ''})
-    } else if (location.pathname === `/profile`) {
+    } 
+    else if (location.pathname === `/profile`) {
       setInputs({...inputsInitialState, ...currentUser, password: '', confirmPassword: ''})
     } else {
       return
@@ -99,16 +100,18 @@ function Form({ type }) {
     setErrors({...ErrorsInitialState})
   }
 
+  console.log(inputs)
+
   return (
     <div className='form-container'>
       <h1>{type} utilisateur</h1>
-      <div className='modal'>{modalMessage}</div>
+      { modalMessage && <div className='modal'>{modalMessage}</div> }
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="civility">*Civilité</label>
-          <select name="civility" id="civility" value={inputs.civility} onChange={handleChange}>
-            <option value="homme">Homme</option>
-            <option value="femme">Femme</option>
+          <label htmlFor="gender">*Civilité</label>
+          <select name="gender" id="gender" value={inputs.gender} onChange={handleChange}>
+            <option value="male">Homme</option>
+            <option value="female">Femme</option>
           </select>
           <span className='warning'>{errors.civility}</span>
         </div>

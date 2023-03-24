@@ -12,26 +12,22 @@ function Nav({ user }) {
     <Navigate to='/' replace />
   }
 
-  const linkStyle = {
-    margin: "1rem",
-    textDecoration: "none",
-    color: 'blue'
-  }
-
   return (
     <nav className="navigation">
-      <Link to='/' style={linkStyle}>Home</Link>
-      <Link to='/users' style={linkStyle}>Liste</Link>
-      { !user.id && <Link to='/login' style={linkStyle}>Connexion</Link> }
-      { user.id && (
-        <>
-          { user.isAdmin === true && <Link to='/add-user' style={linkStyle}>Ajouter</Link> }
-          <div className="profileRight">
+      <div>
+        <Link to='/'><img src="/public/logo.png" alt="logo" /></Link>
+        <Link to='/'>Accueil</Link>
+        <Link to='/users'>Liste</Link>
+        { user.isAdmin === true && <Link to='/add-user'>Ajouter</Link> }
+      </div>
+      <div>
+        { user.id && (
+          <>
             <Link  to='/profile'><img src={user.photo} /></Link>
             <button  onClick={handleLogout}>Déconnexion</button>
-          </div>
-        </>
-      )}
+          </>
+        )}
+      </div>
     </nav>
   )
 }

@@ -2,32 +2,38 @@
   color: red;
 }
 
-.form-container h1 {
-  color: black;
-  font-size: 2rem;
+.logo {
+  display: flex;
+  justify-content: center;
+  
 }
 
-.form-container {
+.login-container h1 {
+  color: black;
+  font-size: 3rem;
+}
+
+.login-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  /* align-items: center; */
   min-height: 100vh;
-  font-size: 1.3rem;
-  background-color:white;
+  font-size: 1.5rem;
   width: 500px;
-  margin: 2em auto 0 auto;
-  padding: 1em 2em;
+  margin: 0 auto;
 }
 form {
   display: flex;
   flex-direction: column;
   gap: 10px;
   width: inherit;
+  padding: 1em;
+  /* background: white; */
 }
 
 /* Input */
-.form-container input {
+.login-container input {
   font-family: inherit;
   width: 100%;
   border: 0;
@@ -46,20 +52,20 @@ form {
   } */
 }
 
-.form-container input[placeholder] {
+.login-container input[placeholder] {
   color: transparent;
 }
 
-.form-container label {
+.login-container label {
   /* position: absolute; */
   /* top: 0; */
   /* display: block; */
   transition: 0.2s;
-  font-size: 1.3rem;
+  font-size: 1rem;
   color: grey;
 }
 
-.form-container input:focus {
+.login-container input:focus {
  
   padding-bottom: 6px;  
   font-weight: 700;
@@ -68,23 +74,23 @@ form {
   border-image-slice: 1;
 }
 
-.form-container input:focus label {
+.login-container input:focus label {
   position: absolute;
   top: 0;
   display: block;
   transition: 0.2s;
-  font-size: 1.3rem;
+  font-size: 1rem;
   color: blue;
   font-weight:700;    
 }
 
 /* Select */
-.form-container select {
+.login-container select {
   /* appearance: none; */
   color: dodgerblue;
   background-color: transparent;
   border: none;
-  padding: 7px 0;
+  padding: 0 1em 0 0;
   margin: 0;
   width: 100%;
   font-family: inherit;
@@ -94,27 +100,14 @@ form {
   z-index: 1;
 }
 
-.form-container option {
+.login-container option {
   color: black;
 }
 
-.form-container select:hover {
+.login-container select:hover {
   cursor: pointer;
 }
 
-.form-container button {
+.login-container button {
   background-color: #ffb630;
-}
-
-/* Modal */
-.modal {
-  text-align: center;
-  color: green;
-  background-color: #00800052;
-  border: 2px solid green;
-  border-radius: 10px;
-  padding: 0.5em 1.5em;
-  font-size: 1rem;
-  position: fixed;
-  top: 20%;
 }
