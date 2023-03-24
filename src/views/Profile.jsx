@@ -4,7 +4,7 @@ import Form from '../components/Form'
 function Profile() {
   return (
     <div>
-      <Form type='Modifier' />
+      <Form type='Modifier' key={'form-3'} />
     </div>
   )
 }
