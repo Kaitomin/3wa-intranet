@@ -21,7 +21,7 @@ const inputsInitialState = {
   birthdate: '1980-01-01',
   city: '',
   country: '',
-  photo: ''
+  photo: 'https://placehold.co/128'
 }
 const ErrorsInitialState = {
   civility: '',
