@@ -101,7 +101,7 @@ export default function Users({ user }) {
       </div>
       <div 
         className="card-user" 
-        style={filterUser.length > 0 ? {background: 'white'} : {background: 'inherit'}}
+        // style={filterUser.length > 0 ? {background: 'white'} : {background: 'inherit'}}
       >
         {filterUser.length == 0 && <p className="no-result">Aucun résultat :(</p>}
         {filterUser.length > 0 && (

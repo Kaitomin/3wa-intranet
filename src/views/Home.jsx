@@ -17,7 +17,7 @@ function Home() {
     dispatch(fetchUserById(userIdRandom));
   };
   return (
-    <div>
+    <div className="home-page">
       <h1>
         Bienvenue sur l'intranet
       </h1>
@@ -33,7 +33,7 @@ function Home() {
 
       <br />
       <button className="button-random" onClick={handleClick}>Dire bonjour à quelqu'un d'autre</button>
-      { Object.keys(userRandom).length > 0 && <CardStyle user={userRandom} /> }
+      { Object.keys(userRandom).length > 0 && <div className="card-home"><CardStyle user={userRandom} /></div> }
     </div>
   );
 }

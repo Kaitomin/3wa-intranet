@@ -5,13 +5,20 @@
     box-shadow: 0px 0px 8px #694a4a;
     color: #253b56;
     margin-bottom: 2rem;
-    line-height: 0.5;
     width: 425px;
+    padding: 1em;
+    height: 225px;
+    background-color: white;
+}
+
+.card > div:first-child {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .card-img {
-    border: 3px solid rgb(31, 6, 121);
-    border-radius: 10px 0px 0px 10px;
+    border-radius: 50%;
     object-fit: cover;
 }
 
@@ -20,16 +27,22 @@
     background-color: white;
     border-radius: 10px;
     width: 100%;
-    margin-right: 1rem;
+    padding-left: 2em;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
 }
 
 .card-content p {
-    margin-left: 4rem;
+    position: relative;
+    margin: 5px 0 0 0;
 }
 
 span.card-content-category {
-    display: flex;
-    flex-direction: row-reverse;
+    position: absolute;
+    top: 0;
+    right: 0;
 }
 
 .card-name {
@@ -38,9 +51,11 @@ span.card-content-category {
 
 .card-button-edit {
     margin-right: 1rem;
-    color: #212529;
-    background-color: #7cc;
-    border-color: #5bc2c2
+    border-color: #5bc2c2;
+    background-color: dodgerblue;
+}
+.card-button-edit a {
+    color: white;   
 }
 
 .card-button-delete {

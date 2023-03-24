@@ -28,12 +28,12 @@ function CardStyle({ user, isAdmin }) {
         <p>
           {user.city} {user.country}
         </p>
-        <p style={{ marginLeft: "42px" }}>📧{user.email}</p>
-        <p style={{ marginLeft: "46px" }}>
+        <p>📧{user.email}</p>
+        <p>
           <i className="fa-solid fa-phone"></i>
           {user.phone}
         </p>
-        <p style={{ marginLeft: "42px" }}>🎂Anniversaire : {user.birthdate}</p>
+        <p>🎂Anniversaire : {user.birthdate}</p>
         <br />
         <div style={{ textAlign: "center" }}>
           {isAdmin && (

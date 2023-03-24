@@ -1,9 +1,9 @@
-body {
+.home-page {
     color: dodgerblue;
     text-align: center;
 }
 
-p {
+.home-page p {
     color: dodgerblue;
     font-size: 1rem;
 }
@@ -14,5 +14,6 @@ p {
 }
 
 .card-home {
-    text-align: center;
+    display: flex;
+    justify-content: center;
 }
