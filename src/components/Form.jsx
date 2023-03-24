@@ -10,8 +10,8 @@ const MODIFIER = 'Modifier'
 const AJOUTER = 'Ajouter'
 const inputsInitialState = {
   id: '',
-  gender: '',
-  category: '',
+  gender: 'Male',
+  category: 'Client',
   lastname:  '',
   firstname:'',
   email:'',
