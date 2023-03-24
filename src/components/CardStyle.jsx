@@ -12,10 +12,12 @@ function CardStyle({ user, isAdmin }) {
         <img className="card-img" src={user.photo} alt="photo" />
       </div>
       <div className="card-content">
-        <span className="card-content-category">{user.category}</span>
+        <span className="card-content-category">
+          {user.category}
+        </span>
         <p style={{ fontWeight: "bold" }}>
           {user.firstname} {user.lastname}
-          <span>
+          <span style={{ fontWeight: "normal" }}>
             (
             {Math.floor(
               (new Date() - new Date(user.birthdate).getTime()) / 3.15576e10
@@ -32,9 +34,6 @@ function CardStyle({ user, isAdmin }) {
           {user.phone}
         </p>
         <p style={{ marginLeft: "42px" }}>🎂Anniversaire : {user.birthdate}</p>
-        <div>
-          <hr className="rounded" />
-        </div>
         <br />
         <div style={{ textAlign: "center" }}>
           {isAdmin && (
