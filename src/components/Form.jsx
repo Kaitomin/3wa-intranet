@@ -43,6 +43,7 @@ function Form({ type }) {
   const users = useSelector(usersSelector)
 
   const [modalMessage, setModalMessage] = useState('')
+  const dispatch = useDispatch()
 
   // Get user id from url query
   const location = useLocation()
@@ -64,7 +65,6 @@ function Form({ type }) {
   }, [])
   
   const [errors, setErrors] = useState(ErrorsInitialState)
-  const dispatch = useDispatch()
 
   const handleChange = e => {
     setInputs({...inputs, [e.target.name]: e.target.value})
@@ -84,13 +84,13 @@ function Form({ type }) {
     switch (type) {
       case MODIFIER:
         dispatch(modifyUser(inputs))
-        setInputs({...currentUser, password: '', confirmPassword: ''})
+        setInputs({...currentUser, ...inputs, password: '', confirmPassword: ''})
         setModalMessage('Utilisateur modifié')
         setTimeout(() => setModalMessage(''), 3000)
         break
       case AJOUTER:
         dispatch(addUser(inputs))
-        setInputs({...inputsInitialState, password: '', confirmPassword: ''})
+        setInputs({...inputsInitialState, ...inputs, password: '', confirmPassword: ''})
         setModalMessage('Utilisateur ajouté')
         setTimeout(() => setModalMessage(''), 3000)
         break
@@ -99,8 +99,6 @@ function Form({ type }) {
     }
     setErrors({...ErrorsInitialState})
   }
-
-  console.log(inputs)
 
   return (
     <div className='form-container'>

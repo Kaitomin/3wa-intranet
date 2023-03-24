@@ -98,6 +98,7 @@ export default function Users({ user }) {
             <option value="Marketing">Marketing</option>
           </select>
         </div>
+        <button onClick={() => dispatch(fetchUsers())}>Rest localStorage</button>
       </div>
       <div 
         className="card-user" 
