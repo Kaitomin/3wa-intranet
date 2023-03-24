@@ -26,7 +26,7 @@ function CardStyle({ user, isAdmin }) {
         <p>{user.email}</p>
         <p>{user.phone}</p>
         <div className="card-content">Anniversaire : {user.birthdate}</div>
-        <hr class="rounded" />
+        <hr className="rounded" />
         <br />
         <div style={{ textAlign: "center" }}>
           {isAdmin && (

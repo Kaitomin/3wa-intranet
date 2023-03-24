@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { addUser, modifyUser, usersSelector } from '../store/userSlice'
 import { useLocation } from 'react-router-dom'
 import { currentUserSelector } from '../store/authSlice'
+import '../styles/Form.css'
 
 const MODIFIER = 'Modifier'
 const AJOUTER = 'Ajouter'
@@ -104,71 +105,71 @@ function Form({ type }) {
       <div className='modal'>{modalMessage}</div>
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="civility">Civilité</label>
+          <label htmlFor="civility">*Civilité</label>
           <select name="civility" id="civility" value={inputs.civility} onChange={handleChange}>
             <option value="homme">Homme</option>
             <option value="femme">Femme</option>
           </select>
-          <span>{errors.civility}</span>
+          <span className='warning'>{errors.civility}</span>
         </div>
         <div>
-          <label htmlFor="category">Catégorie</label>
+          <label htmlFor="category">*Catégorie</label>
           <select name="category" id="category" value={inputs.category} onChange={handleChange}>
             <option value="Client">Client</option>
             <option value="Technique">Technique</option>
             <option value="Marketing">Marketing</option>
           </select>
-          <span>{errors.category}</span>
+          <span className='warning'>{errors.category}</span>
         </div>
         <div>
-          <label htmlFor="lastname">Nom</label>
+          <label htmlFor="lastname">*Nom</label>
           <input type="text" name="lastname" id="lastname" value={inputs.lastname} onChange={handleChange} />
-          <span>{errors.lastname}</span>
+          <span className='warning'>{errors.lastname}</span>
         </div>
         <div>
-          <label htmlFor="firstname">Prénom</label>
+          <label htmlFor="firstname">*Prénom</label>
           <input type="text" name="firstname" id="firstname" value={inputs.firstname} onChange={handleChange} />
-          <span>{errors.firstname}</span>
+          <span className='warning'>{errors.firstname}</span>
         </div>
         <div>
-          <label htmlFor="email">Email</label>
+          <label htmlFor="email">*Email</label>
           <input type="email" name="email" id="email" value={inputs.email} onChange={handleChange} />
-          <span>{errors.email}</span>
+          <span className='warning'>{errors.email}</span>
         </div>        
         <div>
-          <label htmlFor="password">Mot de passe</label>
+          <label htmlFor="password">*Mot de passe</label>
           <input type="password" name="password" id="password" value={inputs.password} onChange={handleChange} />
-          <span>{errors.password}</span>
+          <span className='warning'>{errors.password}</span>
         </div>        
         <div>
-          <label htmlFor="passwordConfirm">Confirmation</label>
+          <label htmlFor="passwordConfirm">*Confirmation</label>
           <input type="password" name="confirmPassword" id="confirmPassword" value={inputs.confirmPassword} onChange={handleChange} />
-          <span>{errors.confirmPassword}</span>
+          <span className='warning'>{errors.confirmPassword}</span>
         </div>        
         <div>
           <label htmlFor="phone">Tel</label>
           <input type="text" name="phone" id="phone" value={inputs.phone} onChange={handleChange} />
-          <span>{errors.phone}</span>
+          <span className='warning'>{errors.phone}</span>
         </div>        
         <div>
           <label htmlFor="birthdate">Date de naissance</label>
           <input type="date" name="birthdate" id="birthdate" value={inputs.birthdate} min="1950-01-01" max="2024-01-01" onChange={handleChange} />
-          <span>{errors.birthDate}</span>
+          <span className='warning'>{errors.birthDate}</span>
         </div>        
         <div>
-          <label htmlFor="city">Ville</label>
+          <label htmlFor="city">*Ville</label>
           <input type="text" name="city" id="city" value={inputs.city} onChange={handleChange} />
-          <span>{errors.city}</span>
+          <span className='warning'>{errors.city}</span>
         </div>        
         <div>
-          <label htmlFor="country">Pays</label>
+          <label htmlFor="country">*Pays</label>
           <input type="text" name="country" id="country" value={inputs.country} onChange={handleChange} />
-          <span>{errors.country}</span>
+          <span className='warning'>{errors.country}</span>
         </div>        
         <div>
           <label htmlFor="photo">URL avatar</label>
           <input type="text" name="photo" id="photo" value={inputs.photo} onChange={handleChange} />
-          <span>{errors.photo}</span>
+          <span className='warning'>{errors.photo}</span>
         </div>
         <button>{type}</button>
       </form>

@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 import { Link, Navigate } from 'react-router-dom'
 import { logout } from '../store/authSlice'
 
-function Nav({ userId, userAdmin, userPhoto }) {
+function Nav({ user }) {
   const dispatch = useDispatch()
 
   const handleLogout = () => {
@@ -21,11 +21,11 @@ function Nav({ userId, userAdmin, userPhoto }) {
     <nav className="navigation">
       <Link to='/' style={linkStyle}>Home</Link>
       <Link to='/users' style={linkStyle}>Liste</Link>
-      { !userId && <Link to='/login' style={linkStyle}>Connexion</Link> }
-      { userId && (
+      { !user.id && <Link to='/login' style={linkStyle}>Connexion</Link> }
+      { user.id && (
         <>
-          { userAdmin === true && <Link to='/add-user' style={linkStyle}>Ajouter</Link> }
-          <Link to='/profile'><img src={userPhoto} /></Link>
+          { user.isAdmin === true && <Link to='/add-user' style={linkStyle}>Ajouter</Link> }
+          <Link to='/profile'><img src={user.photo} /></Link>
           <button onClick={handleLogout}>Déconnexion</button>
         </>
       )}
