@@ -2,6 +2,7 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import { Link, Navigate } from 'react-router-dom'
 import { logout } from '../store/authSlice'
+import '../styles/Nav.css'
 
 function Nav({ user }) {
   const dispatch = useDispatch()
@@ -25,8 +26,10 @@ function Nav({ user }) {
       { user.id && (
         <>
           { user.isAdmin === true && <Link to='/add-user' style={linkStyle}>Ajouter</Link> }
-          <Link to='/profile'><img src={user.photo} /></Link>
-          <button onClick={handleLogout}>Déconnexion</button>
+          <div className="profileRight">
+            <Link  to='/profile'><img src={user.photo} /></Link>
+            <button  onClick={handleLogout}>Déconnexion</button>
+          </div>
         </>
       )}
     </nav>
