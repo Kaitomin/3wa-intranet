@@ -2,7 +2,7 @@ import React from "react";
 import { deleteUser } from "../store/userSlice";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-
+import "../styles/CardStyle.css";
 function CardStyle({ user, isAdmin }) {
   const dispatch = useDispatch();
 
@@ -13,20 +13,23 @@ function CardStyle({ user, isAdmin }) {
       </div>
       <div className="card-content">
         <span style={{ backgroundColor: "#FFC0CB" }}>{user.category}</span>
-        <p>
-          {user.firstname} {user.lastname} (
-          {Math.floor(
-            (new Date() - new Date(user.birthdate).getTime()) / 3.15576e10
-          )}
-          )
-        </p>
+        <div style={{fontWeight: "900"}}>
+          {user.firstname} {user.lastname}
+            (
+              {Math.floor(
+                (new Date() - new Date(user.birthdate).getTime()) / 3.15576e10
+              )}
+            )
+        </div>
         <p>
           {user.city} {user.country}
         </p>
         <p>{user.email}</p>
         <p>{user.phone}</p>
-        <div className="card-content">Anniversaire : {user.birthdate}</div>
-        <hr className="rounded" />
+        <p>Anniversaire : {user.birthdate}</p>
+        <div>
+          <hr className="rounded" />
+        </div>
         <br />
         <div style={{ textAlign: "center" }}>
           {isAdmin && (
@@ -36,7 +39,11 @@ function CardStyle({ user, isAdmin }) {
               </Link>
             </button>
           )}
-          {isAdmin && <button onClick={() => dispatch(deleteUser(user.id))}>Supprimer</button>}
+          {isAdmin && (
+            <button onClick={() => dispatch(deleteUser(user.id))}>
+              Supprimer
+            </button>
+          )}
         </div>
       </div>
     </div>
