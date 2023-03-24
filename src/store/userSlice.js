@@ -29,6 +29,13 @@ export const addUser = createAsyncThunk(
   async (user) => {
     const users = JSON.parse(localStorage.getItem('users')) || await fetchAllUsers()
     user.id = nanoid()
+    delete user.confirmPassword
+
+    // hash password
+    const salt = bcrypt.genSaltSync(10)
+    const hashedPass = bcrypt.hashSync(user.password, salt)
+    user.password = hashedPass
+
     users.push(user)
     localStorage.setItem('users', JSON.stringify(users))
     return users
@@ -47,6 +54,8 @@ export const modifyUser = createAsyncThunk(
     newUser.password = hashedPass
 
     users[userId] = newUser
+    delete newUser.confirmPassword
+
     localStorage.setItem('users', JSON.stringify(users))
 
     return { users, newUser }
