@@ -61,3 +61,8 @@ span.card-content-category {
 .card-button-delete {
     background-color: firebrick;
 }
+
+.card-content > span {
+    padding: 0.5rem;
+    color: white;
+}

@@ -1,7 +1,3 @@
-// TODO: Cette page doit également permettre:
-// un affichage avec un système de filtres par
-//  .lastname, .city et .category :
-
 import { useDispatch, useSelector } from "react-redux";
 import { usersSelector, fetchUsers } from "../store/userSlice";
 import { currentUserSelector } from "../store/authSlice";
@@ -98,11 +94,10 @@ export default function Users({ user }) {
             <option value="Marketing">Marketing</option>
           </select>
         </div>
-        <button onClick={() => dispatch(fetchUsers())}>Rest localStorage</button>
+        { currentUser.isAdmin && <button onClick={() => dispatch(fetchUsers())}>Reset localStorage</button> }
       </div>
       <div 
         className="card-user" 
-        // style={filterUser.length > 0 ? {background: 'white'} : {background: 'inherit'}}
       >
         {filterUser.length == 0 && <p className="no-result">Aucun résultat :(</p>}
         {filterUser.length > 0 && (

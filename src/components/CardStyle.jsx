@@ -12,7 +12,7 @@ function CardStyle({ user, isAdmin }) {
         <img className="card-img" src={user.photo} alt="photo" />
       </div>
       <div className="card-content">
-        <span className="card-content-category">
+        <span style={user.category === "Marketing" ? {backgroundColor: "red"} : user.category === "Client" ? {backgroundColor:"green"} : {backgroundColor: "purple"} } className="card-content-category">
           {user.category}
         </span>
         <p style={{ fontWeight: "bold" }}>
