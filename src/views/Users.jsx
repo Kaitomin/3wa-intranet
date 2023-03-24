@@ -34,9 +34,15 @@ export default function Users({ user }) {
       const city = user.city.toLowerCase();
       const category = user.category.toLowerCase();
 
+      const fullName = `${firstName} ${lastName}`
+      const fullNameReverse = `${lastName} ${firstName}`
+
       return (
         (firstName.includes(searchParams.searchKey.toLowerCase()) ||
-          lastName.includes(searchParams.searchKey.toLowerCase())) &&
+          lastName.includes(searchParams.searchKey.toLowerCase()) ||
+          fullName.includes(searchParams.searchKey.toLowerCase()) ||
+          fullNameReverse.includes(searchParams.searchKey.toLowerCase()) 
+        ) &&
         city.includes(searchParams.city.toLowerCase()) &&
         category.includes(searchParams.category.toLowerCase())
       );
